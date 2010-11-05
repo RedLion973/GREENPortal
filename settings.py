@@ -2,7 +2,7 @@
 
 # current path
 import os
-current_path = os.path.realpath(__file__).split(__file__)[0]
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -16,7 +16,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': current_path+'db/greenportal.db',                      # Or path to database file if using sqlite3.
+        'NAME': os.path.join(BASE_DIR, 'db/greenportal.db'),                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -49,7 +49,7 @@ USE_L10N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = current_path+'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -82,7 +82,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'GREENPortal.urls'
 
 TEMPLATE_DIRS = (
-    current_path+'templates'
+    os.path.join(BASE_DIR, 'templates')
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -95,4 +95,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.admin',
+)
+
+FIXTURE_DIRS = (
+    os.path.join(BASE_DIR, 'fixtures'),
 )
